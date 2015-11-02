@@ -3,14 +3,17 @@ package net.vtst.cranberry.oauth2;
 import java.util.Arrays;
 import java.util.Collection;
 
-public class OAuth2DefaultConfig implements OAuth2Config {
+/**
+ * A default configuration, reading settings from system properties defined in appengine-web.xml.
+ */
+class OAuth2DefaultConfig implements OAuth2Config {
     
   private Collection<String> scopes;
   private String accessType;
   private String callbackPath = "/oauth2callback";
   private String clientSecretsPaths = "/client_secrets.json";
 
-  public OAuth2DefaultConfig() {
+  OAuth2DefaultConfig() {
     this.scopes = Arrays.asList(getProperty("net.vtst.cranberry.oauth2.scopes", "").split(" "));
     this.accessType = getProperty("net.vtst.cranberry.oauth2.accessType", "offline");
     this.callbackPath = getProperty("net.vtst.cranberry.oauth2.callbackPath", "/oauth2callback");
